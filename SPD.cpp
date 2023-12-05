@@ -146,13 +146,12 @@ glm::vec3 SPD::toXYZ()
     for (unsigned int i = 0; i < 32; i++)
     {
         unsigned int CIEIndex = i * 400 / 32 + 20;
-        xyz.x += CIE_X[CIEIndex] * samples[i];
-        xyz.y += CIE_Y[CIEIndex] * samples[i];
-        xyz.z += CIE_Z[CIEIndex] * samples[i];
+        xyz.x += CIE_X[CIEIndex] * samples[i] * (400 / 32.f);
+        xyz.y += CIE_Y[CIEIndex] * samples[i] * (400 / 32.f);
+        xyz.z += CIE_Z[CIEIndex] * samples[i] * (400 / 32.f);
     }
 
-    /*xyz /= 32;*/
-    xyz /= 8;
+    xyz /= CIE_Y_integral;
 
     return xyz;
 }
