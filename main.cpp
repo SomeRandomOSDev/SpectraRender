@@ -10,7 +10,7 @@ int main()
 {
 	std::vector<Sphere> scene;
 	scene.push_back(Sphere(glm::vec3(0, 0, 10), 2));
-	sf::Image image = CPURender(scene, 1920, 1080, 256, 4);
+	sf::Image image = CPURender(scene, 1920, 1080, 32, 4);
 	std::cout << "Saving..." << std::endl;
 	image.saveToFile(
 		"out/render" + std::to_string(time(0)) + ".png");

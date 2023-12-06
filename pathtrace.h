@@ -24,6 +24,7 @@ namespace
 		unsigned int width, unsigned int height, 
 		unsigned int samples, unsigned int bounces)
 	{
+		samples -= samples % 32;
 		std::cout << "Rendering ..." << std::endl;
 		std::cout << "[--------------------------------------------------]\r[";
 		sf::Image render;
@@ -39,7 +40,7 @@ namespace
 				{
 					glm::vec3 cameraPosisition(0, 0, 0), 
 					rayDir(normalize(glm::vec3(j - (width / 2.f), i - (height / 2.f), height)));
-					unsigned int spdSample = int(random01(re) * 32);
+					unsigned int spdSample = k % 32;// int(random01(re) * 32);
 					//unsigned int lambda = ;
 					spdColor.setSample(spdSample, 
 					spdColor.getSample(spdSample) + 
