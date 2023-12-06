@@ -69,8 +69,8 @@ namespace
 	}
 	// https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection.html
 	bool RaySphereIntersection(
-		glm::vec3 rayPos, glm::vec3 rayDir,
-		glm::vec3 sphereOrigin, float sphereRadius,
+		const glm::vec3& rayPos, const glm::vec3& rayDir,
+		const glm::vec3& sphereOrigin, const float sphereRadius,
 		float& t, glm::vec3& pos, glm::vec3& normal)
 	{
 		glm::vec3 oc = rayPos - sphereOrigin;

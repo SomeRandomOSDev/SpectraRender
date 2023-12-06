@@ -7,7 +7,7 @@
 
 int main()
 {
-	sf::Image image = CPURender(1920, 1080, 16, 4);
+	sf::Image image = CPURender(1920, 1080, 256, 4);
 	std::cout << "Saving..." << std::endl;
 	image.saveToFile(
 		"out/render" + std::to_string(time(0)) + ".png");
