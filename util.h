@@ -98,7 +98,7 @@ namespace
 
 	bool RaySceneIntersection(
 	const glm::vec3& rayPos, const glm::vec3& rayDir, std::vector<Sphere> scene,
-	float& t, glm::vec3& pos, glm::vec3& normal)
+	float& t, glm::vec3& pos, glm::vec3& normal, Material* & mat)
 	{
 		t = 10000;
 
@@ -106,9 +106,10 @@ namespace
 
 		for (unsigned int i = 0; i < scene.size(); i++)
 		{
-			float currT = 10000;
+			float currT;
 			glm::vec3 currPos, currNormal;
-			if (RaySphereIntersection(rayPos, rayDir, glm::vec3(0, 0, 10), 1, currT, currPos, currNormal))
+			if (
+RaySphereIntersection(rayPos, rayDir, scene[i].origin, scene[i].radius, currT, currPos, currNormal))
 			{
 				inter = true;
 
@@ -117,6 +118,7 @@ namespace
 					t = currT;
 					pos = currPos;
 					normal = currNormal;
+					mat = scene[i].material;
 				}
 			}
 		}

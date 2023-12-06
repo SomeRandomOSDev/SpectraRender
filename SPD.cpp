@@ -134,7 +134,7 @@ float SPD::getSample(unsigned int sample)
 
 float SPD::getPowerFromWavelength(unsigned int wavelength)
 {
-    unsigned int sample = wavelength * 32 / 400 - 380;
+    unsigned int sample = (wavelength - 380) * 32 / 400;
     if (sample < 0) return 0;
     if (sample >= 32) return 0;
     return samples[sample];

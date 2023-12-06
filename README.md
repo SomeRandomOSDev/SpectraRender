@@ -3,7 +3,12 @@
 
 ## Features
  - ✅ Spectrum utility functions
- - ⬜ BRDFs supported:
+ - ⬜ Materials :
+ 	- ✅ Color
+ 	- ⬜ BRDF
+ 	- ⬜ Roughness
+ 	- ⬜ Metallic
+ - ⬜ BRDFs supported :
  	- ⬜ Lambertian
  	- ⬜ Trowbridge-Reitz (GGX) 
  	- ⬜ Torrance-Sparrow
