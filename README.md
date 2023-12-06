@@ -2,5 +2,11 @@
  An unbiased, hobby pathtracer
 
 ## Features
- - ✅ Add Spectrum utility functions
+ - ✅ Spectrum utility functions
+ - ⬜ BRDFs supported:
+ 	- ⬜ Lambertian
+ 	- ⬜ Trowbridge-Reitz (GGX) 
+ 	- ⬜ Torrance-Sparrow
+ - ✅ Ray-Sphere intersection
+ - ⬜ Ray-Triangle intersection
  - ⬜ More to come ...

@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <random>
+#include "Sphere.h"
 
 namespace
 {
@@ -93,5 +94,32 @@ namespace
 		normal = normalize(pos - sphereOrigin);
 
 		return true;
+	}
+
+	bool RaySceneIntersection(
+	const glm::vec3& rayPos, const glm::vec3& rayDir, std::vector<Sphere> scene,
+	float& t, glm::vec3& pos, glm::vec3& normal)
+	{
+		t = 10000;
+
+		bool inter = false;
+
+		for (unsigned int i = 0; i < scene.size(); i++)
+		{
+			float currT = 10000;
+			glm::vec3 currPos, currNormal;
+			if (RaySphereIntersection(rayPos, rayDir, glm::vec3(0, 0, 10), 1, currT, currPos, currNormal))
+			{
+				inter = true;
+
+				if (currT < t)
+				{
+					t = currT;
+					pos = currPos;
+					normal = currNormal;
+				}
+			}
+		}
+		return inter;
 	}
 }

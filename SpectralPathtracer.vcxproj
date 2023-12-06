@@ -134,11 +134,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SPD.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pathtrace.h" />
     <ClInclude Include="SPD.h" />
     <ClInclude Include="spectrums.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
