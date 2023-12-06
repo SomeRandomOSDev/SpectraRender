@@ -38,8 +38,9 @@ namespace
 				SPD spdColor(0);
 				for (unsigned int k = 0; k < samples; k++)
 				{
+					float offsetX = (float)random01(re), offsetY = (float)random01(re);
 					glm::vec3 cameraPosisition(0, 0, 0), 
-					rayDir(normalize(glm::vec3(j - (width / 2.f), i - (height / 2.f), height)));
+					rayDir(normalize(glm::vec3(j - (width / 2.f) + offsetX, -(i - (height / 2.f)) + offsetY, height)));
 					unsigned int spdSample = k % 32;// int(random01(re) * 32);
 					//unsigned int lambda = ;
 					spdColor.setSample(spdSample, 
