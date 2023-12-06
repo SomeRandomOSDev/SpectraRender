@@ -9,9 +9,24 @@
 int main()
 {
 	std::vector<Material> materials;
-	materials.push_back(Material());
 	std::vector<Sphere> scene;
+
+	materials.push_back(Material());
+	materials.push_back(Material(glm::vec3(1, 0, 0), Reflective));
+	materials.push_back(Material(glm::vec3(0, 1, 0), Reflective));
+	materials.push_back(Material(glm::vec3(0, 0, 1), Reflective));
+	materials.push_back(Material(glm::vec3(1, 0, 1), Reflective));
+	materials.push_back(Material(glm::vec3(0, 1, 1), Reflective));
+
 	scene.push_back(Sphere(glm::vec3(0, 0, 10), 2, &materials[0]));
+	scene.push_back(Sphere(glm::vec3(0, 0, 1015), 1000, &materials[1]));
+	scene.push_back(Sphere(glm::vec3(1005, 0, 0), 1000, &materials[2]));
+	scene.push_back(Sphere(glm::vec3(0, 1005, 0), 1000, &materials[3]));
+	scene.push_back(Sphere(glm::vec3(0, -1005, 0), 1000, &materials[4]));
+	scene.push_back(Sphere(glm::vec3(-1005, 0, 0), 1000, &materials[5]));
+
+////////////////////////////////////////////////////////////////////////
+
 	sf::Image image = CPURender(scene, 1920, 1080, 32, 4);
 	std::cout << "Saving..." << std::endl;
 	image.saveToFile(

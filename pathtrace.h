@@ -54,6 +54,7 @@ namespace
 				}
 				spdColor = spdColor / (float)samples;
 				glm::vec3 color(spdColor.toRGB());
+
 				color.x = std::clamp(color.x, 0.f, 1.f);
 				color.y = std::clamp(color.y, 0.f, 1.f);
 				color.z = std::clamp(color.z, 0.f, 1.f);
