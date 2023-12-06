@@ -1,5 +1,5 @@
-# SpectralPathtracer
- A spectral pathtracer
+# Spectra Render
+ An unbiased, hobby pathtracer
 
 ## Features
  - ✅ Add Spectrum utility functions
