@@ -75,7 +75,7 @@ namespace
 					float offsetX = (float)random01(re), offsetY = (float)random01(re);
 					glm::vec3 cameraPosisition(0, 0, 0), 
 					rayDir(normalize(glm::vec3(j - (width / 2.f) + offsetX, -(i - (height / 2.f)) + offsetY, height)));
-					unsigned int spdSample = k % 32;// int(random01(re) * 32);
+					unsigned int spdSample = int(random01(re) * 32);
 					unsigned int lambda = spdSample * 400 / 32 + 380;
 					spdColor.setSample(spdSample, 
 					spdColor.getSample(spdSample) + 
@@ -84,6 +84,14 @@ namespace
 				spdColor = spdColor / (float)samples;
 				glm::vec3 color(spdColor.toRGB());
 
+				// Tonemap
+
+				color.x = tanh(color.x);
+				color.y = tanh(color.y);
+				color.z = tanh(color.z);
+
+				// Gamma correction
+
 				color.x = std::clamp(color.x, 0.f, 1.f);
 				color.y = std::clamp(color.y, 0.f, 1.f);
 				color.z = std::clamp(color.z, 0.f, 1.f);
@@ -91,6 +99,8 @@ namespace
 				color.x = std::pow(color.x, 1 / 2.2f);
 				color.y = std::pow(color.y, 1 / 2.2f);
 				color.z = std::pow(color.z, 1 / 2.2f);
+
+				// Set Pixel Color
 
 				render.setPixel(j, i, sf::Color(int(color.x * 255), int(color.y * 255), int(color.z * 255)));
 			}

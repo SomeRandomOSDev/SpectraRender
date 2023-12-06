@@ -19,7 +19,7 @@ int main()
 	materials.push_back(Material(glm::vec3(1, 0, 1), Reflective));
 	materials.push_back(Material(glm::vec3(0, 1, 1), Reflective));
 
-	materials.push_back(Material(glm::vec3(1, 1, 1), Emissive, 30));
+	materials.push_back(Material(glm::vec3(1, 1, 1), Emissive, 50));
 
 	scene.push_back(Sphere(glm::vec3(0, 0, 10), 2, &materials[0]));
 	scene.push_back(Sphere(glm::vec3(0, 0, 1015), 1000, &materials[1]));
@@ -27,7 +27,7 @@ int main()
 	scene.push_back(Sphere(glm::vec3(0, 1005, 0), 1000, &materials[3]));
 	scene.push_back(Sphere(glm::vec3(0, -1005, 0), 1000, &materials[4]));
 	scene.push_back(Sphere(glm::vec3(-1005, 0, 0), 1000, &materials[5]));
-	scene.push_back(Sphere(glm::vec3(-2, 2, 4), 0.5f, &materials[6]));
+	scene.push_back(Sphere(glm::vec3(-3, 2, 4), 1, &materials[6]));
 
 ////////////////////////////////////////////////////////////////////////
 
