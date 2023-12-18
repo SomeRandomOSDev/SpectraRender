@@ -13,6 +13,13 @@
 
 namespace
 {
+	enum RenderPass
+	{
+		Combined,
+		Albedo,
+		Normal
+	};
+
 	inline float LambertianBRDF(float rho)
 	{
 		return rho / PI;
@@ -26,17 +33,25 @@ namespace
 		return normalize(RandomVector() + N);
 	}
 
+	
+
 	float Li(
 	std::vector<Sphere> scene, int bounces,
 	glm::vec3 rayOrigin, glm::vec3 rayDir, 
-	unsigned int lambda)
+	unsigned int lambda, RenderPass pass)
 	{
-		if (bounces <= 0) return 0;
+		if (bounces < 0) return 0;
+
 		float t;
 		glm::vec3 pos, N;
 		Material* mat = NULL;
 		if (!RaySceneIntersection(rayOrigin, rayDir, scene, t, pos, N, mat))
 			return 0; 
+
+		if (pass == Albedo)
+			return mat->albedo.getPowerFromWavelength(lambda);
+		if (pass == Normal)
+			return SPD(N, Reflective).getPowerFromWavelength(lambda);
 
 		const float rho = mat->albedo.getPowerFromWavelength(lambda);
 		const float Le = mat->emission * rho;
@@ -45,20 +60,22 @@ namespace
 
 		float cosThetaI = glm::dot(wi, N);
 
-		float fr = LambertianBRDF(rho);
+		float fr =  LambertianBRDF(rho);
 		float pdf = LambertianPDF(cosThetaI);
 
-		float Lr = (fr * Li(scene, bounces - 1, pos + (N * 0.01f), wi, lambda) * cosThetaI) / pdf;
+		float Lr = (fr * Li(scene, bounces - 1, pos + (N * 0.01f), wi, lambda, Combined) * cosThetaI) / pdf;
 
 		return Le + Lr;
 	}
 
 	sf::Image CPURender(std::vector<Sphere> scene, 
 		unsigned int width, unsigned int height, 
-		unsigned int samples, unsigned int bounces)
+		unsigned int samples, unsigned int bounces, RenderPass pass)
 	{
 		samples -= samples % 32;
-		std::cout << "Rendering ... [" << samples << " samples, " << bounces << " bounces]" << std::endl;
+		std::cout << "Rendering " << 
+		(pass == Albedo ? "albedo" : (pass == Normal ? "normal" : "combined")) 
+		<< " pass ... [" << samples << " samples, " << bounces << " bounces]" << std::endl;
 		std::cout << "[--------------------------------------------------]\r[";
 		sf::Image render;
 		render.create(width, height);
@@ -79,7 +96,7 @@ namespace
 					unsigned int lambda = spdSample * 400 / 32 + 380;
 					spdColor.setSample(spdSample, 
 					spdColor.getSample(spdSample) + 
-					Li(scene, bounces, cameraPosisition, rayDir, lambda) * 32);
+					Li(scene, bounces, cameraPosisition, rayDir, lambda, pass) * 32);
 				}
 				spdColor = spdColor / (float)samples;
 				glm::vec3 color(spdColor.toRGB());
@@ -96,9 +113,9 @@ namespace
 				color.y = std::clamp(color.y, 0.f, 1.f);
 				color.z = std::clamp(color.z, 0.f, 1.f);
 
-				color.x = std::pow(color.x, 1 / 2.2f);
-				color.y = std::pow(color.y, 1 / 2.2f);
-				color.z = std::pow(color.z, 1 / 2.2f);
+				//color.x = std::pow(color.x, 1 / 2.2f);
+				//color.y = std::pow(color.y, 1 / 2.2f);
+				//color.z = std::pow(color.z, 1 / 2.2f);
 
 				// Set Pixel Color
 

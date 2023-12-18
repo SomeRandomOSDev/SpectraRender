@@ -121,6 +121,7 @@
       <AdditionalIncludeDirectories>C:\Users\PC\Desktop\C++\lib\SFML-2.5.1\include;C:\Users\PC\Desktop\C++\lib\glm</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
